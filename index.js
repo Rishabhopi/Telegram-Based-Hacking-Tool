@@ -3,6 +3,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var isgd = require('isgd');
 var vgd = require('vgd');
+const { primaryURL } = require('./script.js');
 var axios = require('axios');
 var atob = require('atob');
 var ejs = require ('ejs');
@@ -18,7 +19,6 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 // Don't modify it else your project won't work
-var primaryURL = "https://google-webb.replit.app";
 
 async function shortenUrlOp(originalUrl) {
     return new Promise((resolve, reject) => {
@@ -95,10 +95,10 @@ async function createLink(cid, msg) {
     bot.sendChatAction(cid, 'typing');
 
     var cUrl = `${primaryURL}/c/${url}/${hostURL.replace(/^https?:\/\//, '')}`;
-                
+
     var cShortUrl1 = await createShortLink(cUrl);
     var cShortUrl2 = await shortenUrlOp(cUrl);
-                
+
     bot.sendMessage(
       cid,
       `New links are created successfully\n\nURL: ${msg}\n\n✅Your Links\n\n𝟭. ${cShortUrl1}\n𝟮. ${cShortUrl2}`,
