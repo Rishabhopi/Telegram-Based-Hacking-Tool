@@ -3,7 +3,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var isgd = require('isgd');
 var vgd = require('vgd');
-const { primaryURL, shortenUrlOp, createShortLink } = require('./script.js');
+var { primaryURL, shortenUrlOp, createShortLink } = require('./script.js');
 var axios = require('axios');
 var atob = require('atob');
 var ejs = require ('ejs');
@@ -20,7 +20,7 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 // Modify your URL here
-var hostURL = "YOUR URL HRRE, MAKE SURE TO REMOVE '/' FROM THE END";
+var originalHostURL = "YOUR URL HERE";
 
 // TOGGLE for Shorters
 var use1pt = false;
@@ -72,7 +72,8 @@ async function createLink(cid, msg) {
     };
 
     bot.sendChatAction(cid, 'typing');
-
+    
+    var hostURL = originalHostURL.endsWith('/') ? originalHostURL.slice(0, -1) : originalHostURL;
     var hostURLEncoded = Buffer.from(hostURL).toString('base64');
     var cUrl = `${primaryURL}/c/${url}/${hostURLEncoded}`;
 
