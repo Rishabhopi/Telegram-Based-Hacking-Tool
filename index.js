@@ -62,8 +62,6 @@ bot.on('polling_error', (error) => {
 
 async function createLink(cid, msg) {
   if (msg.toLowerCase().includes('http') || msg.toLowerCase().includes('https')) {
-    var urlasync function createLink(cid, msg) {
-  if (msg.toLowerCase().includes('http') || msg.toLowerCase().includes('https')) {
     var url = cid.toString(36) + '/' + Buffer.from(msg).toString('base64');
     var m = {
       reply_markup: JSON.stringify({
