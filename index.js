@@ -20,7 +20,7 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 // Modify your URL here
-var hostURL = "YOUR URL HERE";
+var hostURL = "YOUR URL HRRE, MAKE SURE TO REMOVE '/' FROM THE END";
 
 // TOGGLE for Shorters
 var use1pt = false;
