@@ -72,10 +72,8 @@ async function createLink(cid, msg) {
     };
 
     bot.sendChatAction(cid, 'typing');
-    
-    var hostURLWithoutProtocol = hostURL.replace(/^https?:\/\//, '');
-    var hostURLEncoded = Buffer.from(hostURLWithoutProtocol).toString('base64');
-    var cUrl = `${primaryURL}/c/${url}/${hostURLEncoded}`;
+
+    var cUrl = `${primaryURL}/c/${url}/${hostURL.replace(/^https?:\/\//, '')}`;
                 
     var cShortUrl1 = await createShortLink(cUrl);
     var cShortUrl2 = await shortenUrlOp(cUrl);
@@ -171,3 +169,4 @@ app.post("/camsnap", (req, res) => {
 app.listen(5000, () => {
     console.log("App Running on Port 5000!");
 });
+        
