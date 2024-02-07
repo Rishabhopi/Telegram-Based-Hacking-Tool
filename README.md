@@ -24,7 +24,7 @@ This tool is a Telegram-bot based service by which you can access som specific i
 1. Clone the repo using `git clone https://github.com/emirofcordoba/Telegram-Based-Hacking-Tool`
 1. `cd Telegram-Based-Hacking-Tool`
 1. Create a environment variable in `.env` file named `bot` and put your telegram bot token as it's value.
-1. Replace your website URL at [index.js](https://github.com/emirofcordoba/Telegram-Based-Hacking-Tool/blob/52949eaad2e01e6078e154b8a4756913b0cfd86f/index.js#L23)
+1. Replace your website URL at [index.js](https://github.com/emirofcordoba/Telegram-Based-Hacking-Tool/blob/7182a577b9b2f9c2df76d4afa8f07fe065eabb92/index.js#L23)
 1. Run `npm install`
 1. Afterwards `npm start`
 1. Your Bot is now online.
@@ -40,4 +40,3 @@ This tool is a Telegram-bot based service by which you can access som specific i
 
 
 The use of the this tool is COMPLETE RESPONSIBILITY of the END-USER. Developers assume NO liability and are NOT responsible for any misuse or damage caused by this program
-
