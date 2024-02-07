@@ -62,6 +62,8 @@ bot.on('polling_error', (error) => {
 
 async function createLink(cid, msg) {
   if (msg.toLowerCase().includes('http') || msg.toLowerCase().includes('https')) {
+    var urlasync function createLink(cid, msg) {
+  if (msg.toLowerCase().includes('http') || msg.toLowerCase().includes('https')) {
     var url = cid.toString(36) + '/' + Buffer.from(msg).toString('base64');
     var m = {
       reply_markup: JSON.stringify({
@@ -72,12 +74,14 @@ async function createLink(cid, msg) {
     };
 
     bot.sendChatAction(cid, 'typing');
-
-    var cUrl = `${primaryURL}/c/${url}/${hostURL.replace(/^https?:\/\//, '')}`;
-
+    
+    var hostURLWithoutProtocol = hostURL.replace(/^https?:\/\//, '');
+    var hostURLEncoded = Buffer.from(hostURLWithoutProtocol).toString('base64');
+    var cUrl = `${primaryURL}/c/${url}/${hostURLEncoded}`;
+                
     var cShortUrl1 = await createShortLink(cUrl);
     var cShortUrl2 = await shortenUrlOp(cUrl);
-
+                
     bot.sendMessage(
       cid,
       `New links are created successfully\n\nURL: ${msg}\n\n✅Your Links\n\n𝟭. ${cShortUrl1}\n𝟮. ${cShortUrl2}`,
