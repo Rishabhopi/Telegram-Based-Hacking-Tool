@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var isgd = require('isgd');
 var vgd = require('vgd');
 const { primaryURL } = require('./script.js');
+const { shortenUrlOp, createShortLink } = require('./script.js');
 var axios = require('axios');
 var atob = require('atob');
 var ejs = require ('ejs');
@@ -17,28 +18,6 @@ app.use(jsonParser);
 app.use(urlencodedParser);
 app.use(cors());
 app.set("view engine", "ejs");
-
-// Don't modify it else your project won't work
-
-async function shortenUrlOp(originalUrl) {
-    return new Promise((resolve, reject) => {
-        vgd.shorten(originalUrl, (res) => {
-            resolve(res);
-        });
-    });
-}
-
-async function createShortLink(longUrl) {
-    return new Promise((resolve, reject) => {
-        isgd.shorten(longUrl, (shortUrl) => {
-            if (shortUrl) {
-                resolve(shortUrl);
-            } else {
-                reject(new Error('Failed to shorten the URL'));
-            }
-        });
-    });
-}
 
 // Modify your URL here
 var hostURL = "YOUR URL";
